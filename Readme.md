@@ -46,7 +46,7 @@ ___
 
 ![Account][account]
 
-## 4. Еhe hug icon appears in the social networks through which you logged in. Click on the 'hug' and money will be immediately sent to another user/charity/crowdfunder.
+## 4. The hug icon appears in the social networks through which you logged in. Click on the 'hug' and money will be immediately sent to another user/charity/crowdfunder.
 
 ![Hug][hug]
 
