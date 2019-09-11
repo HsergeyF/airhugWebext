@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "Airhug",
+  "description": "Airhug - hug, but like",
+  "version": "0.0.0.1",
+  "background": {
+    "scripts": [
+      "event.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Airhug - hug, but like",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+      "*.png","../src/*.js"],
+        "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "css": [],
+      "js": ["content.js"]
+    }
+  ]
+}
