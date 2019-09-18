@@ -16,12 +16,11 @@ class Loading extends Component {
 
 
   render() {
-
     return (
       <div className='main_div'>
         <img src={require('./img/heartbeat.svg')} className='heart'/>
         <img src={require('./img/fingers.png')} className='fingersLoading'/>
-        <p className='balance_name'> Getting your personal data ...</p>
+        <p className='loading_p'> Waiting for your personal data ...</p>
       </div>
     );
   }

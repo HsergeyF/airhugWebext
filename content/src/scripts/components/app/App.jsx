@@ -41,8 +41,16 @@ class App extends Component {
      if(window.location.href.includes('vk.com/feed')){
        var i = 0
        var authors = []
+       var users = []
        var posts = document.getElementsByClassName('_post_content');
        for (var step = 0; step < posts.length; step++)  {
+
+        if( typeof posts[step].getElementsByClassName('post_image')[0] == 'undefined'){
+          users.push(null)
+         }
+         else {
+           users.push(posts[step].getElementsByClassName('post_image')[0].href)
+         }
          authors.push(posts[step].getElementsByClassName('author')[0].innerHTML)
          let author = authors[step]
          let respect = this.createLogo(author)
@@ -51,6 +59,7 @@ class App extends Component {
          b.appendChild(respect)
          i++;
       }
+      console.log(users)
       var target = document.querySelector('#main_feed');
       var observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
@@ -71,7 +80,7 @@ class App extends Component {
     }else if(window.location.href.includes('youtube.com/watch?')){
 
       var video = document.getElementsByClassName('title style-scope ytd-video-primary-info-renderer');
-      
+
     }
    }
 

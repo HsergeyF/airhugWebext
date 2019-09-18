@@ -122,8 +122,8 @@ const stat =
                this.setState({ value:value });
              }}
           >
-        <div style = {{}}>
-          <XYPlot xType="ordinal" width={300} height={100} xDistance={100}>
+        <div >
+          <XYPlot style = {{marginLeft:-15}} xType="ordinal" color = "#0f77ff" width={300} height={100} xDistance={10}>
           <VerticalGridLines />
           <HorizontalGridLines />
           <XAxis />
@@ -132,8 +132,8 @@ const stat =
         </div>
           <Typography component="div" dir={'x'}>Item Two </Typography>
       </SwipeableViews>
-          <Button onClick = {()=>this.login()} style ={{ width:'120px',color:"#fff" ,backgroundColor: '#1978fa',height:50,marginTop:5,marginLeft:20}}> Histogram </Button>
-          <Button onClick = {()=>this.login()} style ={{ width:'120px',color:"#fff" ,backgroundColor: '#1978fa',height:50,marginTop:5,marginLeft:0}}> Linear </Button>
+          <Button onClick = {()=>this.login()} style ={{ width:'125px',color:"#fff" ,backgroundColor: '#1978fa',height:50,marginTop:5,marginLeft:25}}> Linear </Button>
+          <Button onClick = {()=>this.login()} style ={{ width:'125px',color:"#1978fa" , position:'absolute',backgroundColor: '#fff',height:50,marginTop:5,marginLeft:-10,border: '1.19114px solid #0F77FF'}}> Histogram </Button>
 </div>
 
     return (

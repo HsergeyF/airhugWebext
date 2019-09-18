@@ -23,7 +23,6 @@ class Cabinet extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.store.avatar)
     axios(
         {
           method: 'get',
@@ -58,22 +57,23 @@ goTopage(reducer){
 
   render() {
 
+    const loading = <div className='main_div'>
+      <img src={require('../img/heartbeat.svg')} className='heart_a'/>
+      <img src={require('../img/fingers.png')} className='fingersLoading_a'/>
+      <p className='loading_p'> Waiting for your personal data ...</p>
+    </div>
 
 let lists = this.state.transactions.map(b =>
    <List key = {b.txhash} component="div" style = {{ overflow:'auto',width:300,height:70}} disablePadding>
-
      <ListItem button className='accountListItem'>
        <ListItemAvatar>
          <Avatar src = {vk} size="25"  />
        </ListItemAvatar>
-
        <ListItem style={{marginLeft:40,marginTop:-10,position:"absolute"}}>
-        <Avatar src = 'https://pp.userapi.com/c849132/v849132529/d3813/odoZUUukkbI.jpg?ava=1' size="20" round = {true} />
+        <Avatar name = {b.from} color = "#6793D5" size="20" round = {true} />
         <ListItemText inset primary={b.from} />
       </ListItem>
-
       <p style = {{position:'absolute',display:'inline-block',width: '140px',height:' 20px',marginLeft:' 60px',marginTop: '20px',fontFamily: 'Roboto',fontStyle: 'normal',fontWeight: 'normal',fontSize: '12px',lineHeight: 'normal',color: '#303030'}}> Incomig transfer</p>
-
       <ListItemSecondaryAction>
         <p style = {{fontFamily: 'Roboto',fontStyle: 'normal',fontWeight: 'bold',fontSize: '16px',lineHeight: 'normal',color: '#FF5D7D'}}>{b.amount} L</p>
       </ListItemSecondaryAction>
@@ -88,7 +88,7 @@ let lists = this.state.transactions.map(b =>
         </div>
 
         <div  className = "account_middle">
-          <Avatar src = {this.props.store.avatar} size="70" round = {true} className = 'avatar'/>
+          <Avatar src = {this.props.store.avatar} name = {this.props.store.login} color = "#6793D5" size="70" round = {true} className = 'avatar'/>
         </div>
 
         <div className = "account_middle">
@@ -102,7 +102,7 @@ let lists = this.state.transactions.map(b =>
         </div>
 
         <div className='listDiv'>
-          {lists}
+          {lists.length ? lists: loading}
         </div>
 
         <Snackbar
