@@ -33,15 +33,14 @@ class Cabinet extends Component {
           }).then((response) =>  {
             if(response.data.success === true){
               let transactions = []
-              console.log(response.data.payments)
-              response.data.payments.forEach(function(item, i, arr){
 
+              response.data.payments.forEach(function(item, i, arr){
                 transactions.push({
                    date: item.created_at.substring(0,10),
                    amount:item.type=="create_account"?'0':parseInt(item.amount).toFixed(0),
                    to: item.type=="create_account"?'0':item.receive_info.name,
                    from:item.extra.transaction.sender_info.login,
-                   hash:"https://testnet.steexp.com/tx/" +item.transaction_hash,
+                   hash:"https://steexp.com/tx/" +item.transaction_hash,
                    txhash:item.transaction_hash,
                    type: item.extra.transaction.extra
                 })
@@ -54,7 +53,9 @@ class Cabinet extends Component {
 goTopage(reducer){
   this.props.dispatch({type:reducer});
 }
-
+openLink(link){
+  var win = window.open(link, '_blank');
+}
   render() {
 
     const loading = <div className='main_div'>
@@ -64,10 +65,10 @@ goTopage(reducer){
     </div>
 
 let lists = this.state.transactions.map(b =>
-   <List key = {b.txhash} component="div" style = {{ overflow:'auto',width:300,height:70}} disablePadding>
-     <ListItem button className='accountListItem'>
+   <List key = {b.txhash}  component="div" style = {{ overflow:'auto',width:300,height:70}} disablePadding>
+     <ListItem button onClick={()=>this.openLink(b.hash)} className='accountListItem'>
        <ListItemAvatar>
-         <Avatar src = {vk} size="25"  />
+           <img src={vk} style = {{width:30}}/>
        </ListItemAvatar>
        <ListItem style={{marginLeft:40,marginTop:-10,position:"absolute"}}>
         <Avatar name = {b.from} color = "#6793D5" size="20" round = {true} />
@@ -88,7 +89,7 @@ let lists = this.state.transactions.map(b =>
         </div>
 
         <div  className = "account_middle">
-          <Avatar src = {this.props.store.avatar} name = {this.props.store.login} color = "#6793D5" size="70" round = {true} className = 'avatar'/>
+          <img src={this.props.store.avatar} className='avatar'/>
         </div>
 
         <div className = "account_middle">

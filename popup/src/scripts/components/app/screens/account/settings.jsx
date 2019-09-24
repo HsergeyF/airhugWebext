@@ -1,6 +1,6 @@
 import axios from 'axios'
 import config from '../axiosConfig';
-import Avatar from 'react-avatar';
+import Avatar from '@material-ui/core/Avatar';
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
 import SwipeableViews from 'react-swipeable-views';
@@ -144,7 +144,7 @@ const stat =
         </div>
 
         <div  className = "account_middle">
-          <Avatar src = {this.props.store.avatar} size="70" round = {true} className = 'avatar'/>
+            <img src={this.props.store.avatar} className='avatar'/>
         </div>
 
         <div className = "account_middle">
