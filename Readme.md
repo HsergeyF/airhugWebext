@@ -12,7 +12,7 @@ ___
 In addition to social networks, a button can be set by any sites, blogs, and so on. Just insert a piece of code into your web page and start getting "hugs".
 
 🌀 Currently in development, functionality is partly unavailable.
-
+Backend: [Airhug server part](https://github.com/WcAmbros/airhug_server)
 
 # For whom
 

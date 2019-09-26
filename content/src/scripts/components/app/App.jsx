@@ -12,10 +12,8 @@ class App extends Component {
   };
   }
 
-  clickSend(){
-    this.setState({showAlert:true,alertText:"Sucess"})
-  }
-  createLogo(author){
+
+  createLogo(author,token,amount){
     let respect = document.createElement('a');
     let image = document.createElement('img');
     image.className = "respect";
@@ -26,48 +24,79 @@ class App extends Component {
     respect.appendChild(image);
     respect.onclick = function () {
       axios({
-           method: 'get',
-           url: 'https://api.findinamika.com/api/account',
+           method: 'post',
+           url: 'https://api.findinamika.com/api/account/payment/',
            headers: {
-             'Authorizations': 'aa'
+             'Authorization': token
+           },
+           data: {
+             to: author,
+             currency:"RUB",
+             amount:amount,
+             memo:'vk'
            }
          })
          .then((response) => {console.log(response)})
+
       alert('You huged '+author)
     };
     return respect;
   }
+
+
+  collectUsers(posts){
+    let users = []
+    for (var step = 0; step < posts.length; step++)  {
+     if( typeof posts[step].getElementsByClassName('post_image')[0] == 'undefined'){
+       users.push(null)
+      }
+      else {
+        users.push(posts[step].getElementsByClassName('post_image')[0].href.substring(15,posts[step].getElementsByClassName('post_image')[0].href.length))
+      }
+    }
+    return users
+  }
+
+
   componentDidMount() {
      if(window.location.href.includes('vk.com/feed')){
-       var i = 0
-       var authors = []
-       var users = []
-       var posts = document.getElementsByClassName('_post_content');
-       for (var step = 0; step < posts.length; step++)  {
+       let i = 0
+       let authors = []
+       let posts = document.getElementsByClassName('_post_content');
+       let users = this.collectUsers(posts)
+       axios({
+            method: 'post',
+            url: 'https://api.findinamika.com/api/oauth/vk/isset',
+            headers: {
+              'Authorization': this.props.count.token,
+            },
+            data:{
+              list_id:users
+            }
+          })
+          .then((response) => {
+            for (var step = 0; step < response.data.result.length; step++)  {
+              i++;
+              if(response.data.result[step].isset){
+                let respect = this.createLogo(response.data.result[step].login,this.props.count.token,this.props.count.donationAmount)
+                let a = posts[i].getElementsByClassName('like_cont ')[0]
+                let b = a.getElementsByClassName('like_btns')[0]
+                b.appendChild(respect)
+              }
+            }
+          })
 
-        if( typeof posts[step].getElementsByClassName('post_image')[0] == 'undefined'){
-          users.push(null)
-         }
-         else {
-           users.push(posts[step].getElementsByClassName('post_image')[0].href)
-         }
-         authors.push(posts[step].getElementsByClassName('author')[0].innerHTML)
-         let author = authors[step]
-         let respect = this.createLogo(author)
-         var a = posts[step].getElementsByClassName('like_cont ')[0]
-         var b = a.getElementsByClassName('like_btns')[0]
-         b.appendChild(respect)
-         i++;
-      }
-      console.log(users)
+
       var target = document.querySelector('#main_feed');
       var observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
             var post = document.getElementsByClassName('_post_content');
+            let users = this.collectUsers(posts)
+            
             for (var step = i; step < posts.length; step++)  {
               authors.push(posts[step].getElementsByClassName('author')[0].innerHTML)
               let author = authors[step]
-              let respect = this.createLogo(author)
+              let respect = this.createLogo(author,this.props.count.token)
               var a = posts[step].getElementsByClassName('like_cont ')[0]
               var b = a.getElementsByClassName('like_btns')[0]
               b.appendChild(respect)
@@ -75,12 +104,12 @@ class App extends Component {
            }
          });
        });
+
       var config = { attributes: true, childList: true, characterData: true };
       observer.observe(target, config);
-    }else if(window.location.href.includes('youtube.com/watch?')){
-
+    }
+    else if(window.location.href.includes('youtube.com/watch?')){
       var video = document.getElementsByClassName('title style-scope ytd-video-primary-info-renderer');
-
     }
    }
 
