@@ -1,8 +1,6 @@
 # [Airhug web extention](https://airhug.click/)
 
 ![Airhug][logo]
-# Demo
-[![Airhug demo](http://img.youtube.com/vi/ymWTVlgXm-I/0.jpg)](http://www.youtube.com/watch?v=ymWTVlgXm-I "Airhug demo")
 
 # About
 
@@ -15,6 +13,10 @@ In addition to social networks, a button can be set by any sites, blogs, and so 
 
 🌀 Currently in development, functionality is partly unavailable.
 Backend: [Airhug server part](https://github.com/WcAmbros/airhug_server)
+Check quick video demonstration:
+
+[![Airhug demo](http://img.youtube.com/vi/ymWTVlgXm-I/0.jpg)](http://www.youtube.com/watch?v=ymWTVlgXm-I "Airhug demo")
+
 
 # For whom
 
