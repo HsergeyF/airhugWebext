@@ -1,6 +1,8 @@
 # [Airhug web extention](https://airhug.click/)
 
 ![Airhug][logo]
+# Demo
+[![Airhug demo](http://img.youtube.com/vi/ymWTVlgXm-I/0.jpg)](http://www.youtube.com/watch?v=ymWTVlgXm-I "Airhug demo")
 
 # About
 
